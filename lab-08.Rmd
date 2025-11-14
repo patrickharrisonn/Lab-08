@@ -1,6 +1,6 @@
 ---
 title: "Lab 08 - Predicting rain"
-author: "INSERT NAME HERE"
+author: "Patrick Harrison"
 date: "`r Sys.Date()`"
 output: html_document
 ---
@@ -46,13 +46,15 @@ weather %>%
 1. Are there any missing values in our variable of interest `RainTomorrow`? If so, we filter them out and save the new dataset as `weather_noNA`. 
 
 ```{r}
-
+weather_noNA <- weather %>%
+  filter(is.na(RainTomorrow)==FALSE)
 ```
 
 2. Which cities are the ones with more rain days? To do this, let's analyze the `RainToday` variable. 
 
 ```{r}
-
+weather_noNA %>%
+  filter(RainToday=="Yes")
 ```
 
 # Exercise 2: Logistic regression
@@ -161,7 +163,7 @@ weather_rec2 <- recipe(
 
 ```
 
-3. Now let's evaluate the predictive performance of these two models on our test set.
+#3. Now let's evaluate the predictive performance of these two models on our test set.
 
 - Create the ROC curve and get the AUC (area under the curve) value for your first simple logistic regression model.
 
