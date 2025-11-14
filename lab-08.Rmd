@@ -63,7 +63,6 @@ We will focus our analysis on the city of `Portland`.
 Remove `eval=FALSE` from below once you have defined the object `weather_noNA`.
 
 ```{r eval=FALSE}
-# remove eval=FALSE
 weather_Portland <- weather_noNA %>%
   filter(Location == "Portland")
 ```
@@ -71,7 +70,10 @@ weather_Portland <- weather_noNA %>%
 1. Try to predict `RainTomorrow` by fitting a linear regression using the variable `RainToday` and print the output using `tidy()`.
 
 ```{r}
-
+RainMachine <- logistic_reg() %>%
+  set_engine("glm") %>%
+  fit(RainToday ~ RainTomorrow, data=weather_Portland, family = "binomial") %>%
+tidy(RainMachine)
 ```
 
 2. For each point in our dataset, what are the fitted probabilities that tomorrow it's going to rain? 
